@@ -42,8 +42,8 @@
         </div>
         <ul class="carriage-nav">
           <li class="carriage-nav-items" :class="pathName === item.url ? 'carriage-items-active' : null" v-for="item in navList" :key="item.url">
-            <span class="navitems-icon" v-bind:class="item.iconClass"></span>
-            <router-link v-bind:to="item.url">
+            <span class="navitems-icon" :class="item.iconClass"></span>
+            <router-link :to="item.url">
               <span class="navitems-text">{{item.navName}}</span>
             </router-link>
           </li>
