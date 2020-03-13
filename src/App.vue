@@ -41,7 +41,7 @@
           </span>
         </div>
         <ul class="carriage-nav">
-          <li class="carriage-nav-items" :class="pathName === item.url ? 'carriage-items-active' : null" v-for="item in navList" :key="item.url">
+          <li :class="[{'carriage-items-active': pathName === item.url}, 'carriage-nav-items']" v-for="item in navList" :key="item.url">
             <span class="navitems-icon" :class="item.iconClass"></span>
             <router-link :to="item.url">
               <span class="navitems-text">{{item.navName}}</span>
@@ -71,13 +71,11 @@ export default {
         { navName: "设备管理", url: "/device", iconClass: 'navitems-manage' },
         { navName: "系统管理", url: "/system", iconClass: 'navitems-sysmanage' }
       ],
-      pathName: '',
       nowTime: 'YYYY-MM-DD hh:mm',
     };
   },
   created() {
     this.fetchData();
-    this.pathName = this.$route.path
     this.getRealTime()
   },
   methods: {
@@ -104,11 +102,11 @@ export default {
       this.nowTime = nowTime + ' ' + nowMse
     }
   },
-  watch: {
-    $route: function(to, from) {
-      this.pathName = to.path
+  computed: {
+    pathName: function() {
+      return this.$route.path
     }
-  }
+  },
 };
 </script>
 
